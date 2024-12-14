@@ -1,1 +1,16 @@
-<h1>Welcome to the home page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container text-center mt-5">
+        <h1 class="display-4 text-primary">Welcome to the Student Exam Performance Predictor</h1>
+        <p class="lead mt-3">Use this app to predict a student's math score based on their profile and past performance.</p>
+        <a href="{{ url_for('predict_datapoint') }}" class="btn btn-primary btn-lg mt-4">Get Started</a>
+    </div>
+</body>
+</html>
