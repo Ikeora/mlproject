@@ -48,8 +48,44 @@ class ModelTrainer:
                 "AdaBoost Regressor": AdaBoostRegressor()
             }
 
+            param_grids = {
+                "Random Forest": {
+                    'n_estimators': [50, 100, 200],
+                    'max_depth': [None, 10, 20],
+                    'min_samples_split': [2, 5, 10]
+                },
+                "Decision Tree": {
+                    'max_depth': [None, 10, 20, 30],
+                    'min_samples_split': [2, 5, 10]
+                },
+                "Gradient Boosting": {
+                    'n_estimators': [50, 100, 200],
+                    'learning_rate': [0.01, 0.1, 0.2],
+                    'max_depth': [3, 5, 10]
+                },
+                "Linear Regression": {},  # No hyperparameters to tune
+                "K-Neighbors Regressor": {
+                    'n_neighbors': [3, 5, 7, 9],
+                    'weights': ['uniform', 'distance']
+                },
+                "XGBRegressor": {
+                    'n_estimators': [50, 100, 200],
+                    'learning_rate': [0.01, 0.1, 0.2],
+                    'max_depth': [3, 5, 10]
+                },
+                "CatBoost Regressor": {
+                    'iterations': [100, 200],
+                    'learning_rate': [0.01, 0.1, 0.2],
+                    'depth': [6, 8, 10]
+                },
+                "AdaBoost Regressor": {
+                    'n_estimators': [50, 100, 200],
+                    'learning_rate': [0.01, 0.1, 0.2]
+                }
+            }
+
             model_report:dict= evaluate_models(x_train=x_train,y_train=y_train,x_test=x_test,
-                                              y_test=y_test,models=models)
+                                              y_test=y_test,models=models,params=param_grids)
             
             
             # To get best model score and name from dict
@@ -60,6 +96,7 @@ class ModelTrainer:
             best_model= models[best_model_name]
 
             if best_model_score< 0.6:
+               logging.info("None of the considered models performed well")
                raise CustomException("No best model found",sys)
 
             logging.info("Best found model on test dataset")
