@@ -37,6 +37,6 @@ def predict_datapoint():
         return render_template('home.html',result=result[0])
     
 if __name__=="__main__":
-    app.run(host='localhost',debug=True)
+    app.run(debug=True)
     
     
